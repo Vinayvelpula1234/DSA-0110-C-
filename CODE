@@ -1,0 +1,167 @@
+#include <LiquidCrystal_I2C.h> 
+
+#include <Keypad.h> 
+
+// Set the LCD address and size (16x2) 
+
+LiquidCrystal_I2C lcd_1(32, 16, 2); 
+
+// Define the keypad matrix const byte 
+
+ROWS = 4; // Four rows const byte COLS 
+
+= 4; // Four columns char 
+
+keys[ROWS][COLS] = 
+
+{ 
+
+ {'1', '2', '3', 'A'}, 
+
+ {'4', '5', '6', 'B'}, 
+
+ {'7', '8', '9', 'C'}, 
+
+ {'*', '0', '#', 'D'} 
+
+}; 
+
+// Set the row and column pins for the keypad byte 
+
+rowPins[ROWS] = {9, 8, 7, 6}; byte colPins[COLS] 
+
+= {5, 4, 3, 2};// Initialize the Keypad library 
+
+Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS); 
+
+void setup() 
+
+{ lcd_1.init(); 
+
+ 
+
+ lcd_1.setCursor(0, 0); lcd_1.backlight(); // 
+
+Turn on the backlight lcd_1.display(); 
+
+lcd_1.clear(); 
+
+ 
+
+ lcd_1.setCursor(0, 0); 
+
+lcd_1.print("DSA0110-C++"); 
+
+lcd_1.setCursor(0, 1); 
+
+lcd_1.print("CAPSTONE PROJECT"); 
+
+delay(4000); 
+
+ lcd_1.clear(); 
+
+ 
+
+ lcd_1.setCursor(0, 0); 
+
+ lcd_1.print("NUMBER CONVERSION CALCULATOR"); 
+
+ lcd_1.setCursor(0, 1); 
+
+ lcd_1.print("DECIMAL-BINARY"); 
+
+ delay(4000); // Wait for 2000 millisecond(s) lcd_1.clear(); 
+
+ 
+
+ lcd_1.setCursor(0, 0); 
+
+ lcd_1.print("SUBMITTED BY:");lcd_1.setCursor(0, 1); 
+
+lcd_1.print("192211995"); 
+
+delay(4000); lcd_1.clear(); 
+
+lcd_1.setCursor(0, 0); lcd_1.print("192211995"); 
+
+lcd_1.setCursor(0, 1); lcd_1.print("192210024"); 
+
+delay(4000); 
+
+lcd_1.clear(); 
+
+ 
+
+ lcd_1.setCursor(0, 0); 
+
+ lcd_1.print("SUBMITTED TO:"); 
+
+ lcd_1.setCursor(0, 1); 
+
+lcd_1.print("Dr.S.Sankar"); 
+
+delay(4000); lcd_1.clear(); 
+
+ 
+
+ 
+
+ lcd_1.print("Enter Number:"); 
+
+} 
+
+void loop() { char key = keypad.getKey(); static String 
+
+number = ""; // To store the input number if (key) 
+
+{ if (key == 
+
+'*') 
+
+ {// Convert number to binary and display int 
+
+decimalValue = number.toInt(); 
+
+ String binaryString = String(decimalValue, BIN); 
+
+ lcd_1.clear(); lcd_1.setCursor(0, 
+
+0); lcd_1.print("Decimal: "); 
+
+lcd_1.print(decimalValue); 
+
+lcd_1.setCursor(0, 1); 
+
+lcd_1.print("Binary: "); 
+
+lcd_1.print(binaryString); 
+
+ number = ""; // Clear the input after processing 
+
+ } 
+
+ 
+
+ else if (key == '#') 
+
+ { 
+
+ // Clear the input number = ""; 
+
+lcd_1.clear(); lcd_1.setCursor(0, 
+
+0); lcd_1.print("Enter Number:"); 
+
+ } else { 
+
+ // Append the key to the number 
+
+number += key; lcd_1.setCursor(0, 1); 
+
+lcd_1.print("Input: "); 
+
+lcd_1.print(number); 
+
+ } 
+
+ }}
